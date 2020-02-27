@@ -1,0 +1,6 @@
+Tag: affinity/affinity, Hostname: nid00001, Rank: 0, Thread: 0
+    CPU affinity: [   0]
+Tag: affinity/affinity, Hostname: nid00001, Rank: 0, Thread: 1
+    CPU affinity: [   1]
+Tag: affinity/affinity, Hostname: nid00001, Rank: 0, Thread: 2
+    CPU affinity: [   2]
