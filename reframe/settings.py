@@ -1,7 +1,7 @@
 #
 # ReFrame generic settings
 #
-
+ReframePrefix = '/storage/homefs'
 
 class ReframeSettings:
     job_poll_intervals = [1, 2, 3]
@@ -27,9 +27,10 @@ class ReframeSettings:
                 'descr': 'UniBE HPC system UBELiX',
                 'hostnames': ['submit'],
                 'modules_system': 'lmod',
-                'stagedir':   '/gpfs/homefs/id/ms20e149/ReFrame/stage/',
-                'outputdir':  '/gpfs/homefs/id/ms20e149/ReFrame/output/',
-                'perflogdir': '/gpfs/homefs/id/ms20e149/ReFrame/logs/',
+                'stagedir':   '{}/ms20e149/ReFrame/stage/'.format(ReframePrefix),
+                'outputdir':  '{}/ms20e149/ReFrame/output/'.format(ReframePrefix),
+                'perflogdir': '{}/ms20e149/ReFrame/logs/'.format(ReframePrefix),
+                'resourcesdir': '{}/ms20e149/ReFrame/resources'.format(ReframePrefix),
                 'partitions': {
                     'login': {
                         'scheduler': 'local',
@@ -42,14 +43,14 @@ class ReframeSettings:
                         'scheduler': 'nativeslurm',
                         'modules': [],
                         'access':  [],
-                        'environs': ['foss', 'intel'],
+                        'environs': ['foss', 'intel', 'pgi'],
                         'descr': 'compute nodes'
                     },
                      'gpu': {
                         'scheduler': 'nativeslurm',
                         'modules': [],
-                        'access':  ['--partition=gpu'],
-                        'environs': ['foss', 'intel'],
+                        'access':  ['--partition=gpu', '--gres=gpu:teslaP100:1'],
+                        'environs': ['foss', 'intel', 'pgi'],
                         'descr': 'gpu compute nodes'
                     }
                 }
@@ -82,7 +83,14 @@ class ReframeSettings:
                     'cc':  'mpiicc',
                     'cxx': 'mpiicpc',
                     'ftn': 'mpiifort',
-                }
+                },
+                'pgi': {
+                    'type': 'ProgEnvironment',
+                    'modules': ['PGI'],
+                    'cc':  'pgcc',
+                    'cxx': 'pgc++',
+                    'ftn': 'pgf90',
+                },
             }
         }
     }
